@@ -375,6 +375,11 @@ def Get_packages_on_OBS(Distrib_name, Arch):
     ### Bin package ###
     Bin_name_wanted = Get_package(Bin_name, Distrib_name, Arch, Revision, Package_type, Package_infos, Destination)
 
+if fnmatch.fnmatch(Distrib_name, "RHEL*") or fnmatch.fnmatch(Distrib_name, "CentOS*"):
+    if OBS_package == "ZenLib":
+        Suffix="".join(Version.split(".")[0:3])
+        Get_package(Bin_name+Suffix, Distrib_name, Arch, Revision, Package_type, Package_infos, Destination)
+
     ### Debug package ###
     Debug_name_wanted = ''
     if not any(fnmatch.fnmatch(Distrib_name, p) for p in ["Arch*", "RHEL_5", "CentOS_5"]):
