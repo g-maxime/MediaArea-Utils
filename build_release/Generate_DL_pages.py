@@ -466,6 +466,11 @@ def OBS():
                 Release_with_mil = False
                 Release_with_zl = False
 
+            if Project == "rc":
+                Release_with_gui = False
+                Release_with_mil = False
+                Release_with_zl = False
+
             Rowspan = 0
             if Release_with_cli == True:
                 Rowspan = Rowspan + 1
@@ -558,7 +563,9 @@ def OBS():
                 Content = Content.replace("RELEASE_VERSION", Release_name_formated)
                 Content = Content.replace("RELEASE_ARCH", Package_infos[Package_type].get(Arch, Arch))
 
-                Request = "SELECT version, cliname, clinamedbg, guiname, guinamedbg"
+                Request = "SELECT version, cliname, clinamedbg"
+                if Project != "rc":
+                    Request = Request + ", guiname, guinamedbg"
                 if Project == "mc":
                     Request = Request + ", servername, servernamedbg"
                 Request = Request + " FROM " + Table_releases_dlpages \
@@ -570,8 +577,9 @@ def OBS():
                     Project_version = Result[0]
                     Cli_name = Result[1]
                     Cli_name_dbg = Result[2]
-                    Gui_name = Result[3]
-                    Gui_name_dbg = Result[4]
+                    if Release_with_gui:
+                        Gui_name = Result[3]
+                        Gui_name_dbg = Result[4]
                     if Project == "mc":
                         Server_name = Result[5]
                         Server_name_dbg = Result[6]
@@ -583,7 +591,8 @@ def OBS():
 
                 Content = Content.replace(Project.upper() + "_VERSION", Project_version)
                 Content = Content.replace("CLI_PACKAGE", Cli_name)
-                Content = Content.replace("GUI_PACKAGE", Gui_name)
+                if Release_with_gui:
+                    Content = Content.replace("GUI_PACKAGE", Gui_name)
 
                 if Project == "mc":
                     Content = Content.replace("SERVER_PACKAGE", Server_name)
@@ -719,9 +728,9 @@ ZL_version = sys.argv[5] if len(sys.argv) > 5 else ""
 # The directory from where the python script is executed
 Script_emplacement = os.path.dirname(os.path.realpath(__file__))
 
-if Project != "mc" and Project != "mi" and Project != "qc" and Project != "bm" and Project != "am" and Project != "da" and Project != "mm":
+if Project != "mc" and Project != "mi" and Project != "qc" and Project != "bm" and Project != "am" and Project != "da" and Project != "mm" and Project != "rc":
     print
-    print "The first argument must be mc, mi, bm, am, da, mm or qc"
+    print "The first argument must be mc, mi, bm, am, da, mm, qc or rc"
     print
     sys.exit(1)
 
@@ -733,7 +742,7 @@ if OS_name not in {"windows", "mac", "linux", "sources", "repos", "all"}:
 
 if OS_name == "windows" or OS_name == "mac" or OS_name == "all":
     # sys.argv[0] == Generate_DL_pages.py
-    if len(sys.argv) < 4 and (Project == "qc" or Project == "bm" or Project == "am" or Project == "mm"):
+    if len(sys.argv) < 4 and (Project == "qc" or Project == "bm" or Project == "am" or Project == "mm" or Project == "rc"):
         print
         print "If you ask windows, mac, appimage, sources or all, you must provide the version"
         print "numbers as 3rd arguments."
@@ -771,7 +780,7 @@ if OS_name == "windows" or OS_name == "mac" or OS_name == "appimage":
 
 if OS_name == "linux":
     OBS()
-    if Project != "bm" and Project != "am" and Project != "da" and Project != "mm":
+    if Project != "bm" and Project != "am" and Project != "da" and Project != "mm" and Project != "rc":
         DL_pages("appimage")
     if Project == "mi":
         DL_pages("javascript")
@@ -785,7 +794,7 @@ if OS_name == "repos":
 if OS_name == "all":
     DL_pages("windows")
     DL_pages("mac")
-    if Project != "bm" and Project != "am" and Project != "da" and Project != "mm":
+    if Project != "bm" and Project != "am" and Project != "da" and Project != "mm" and Project != "rc":
         DL_pages("appimage")
     OBS()
     Sources()
