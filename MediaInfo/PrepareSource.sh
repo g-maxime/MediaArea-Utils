@@ -43,7 +43,7 @@ function _get_source () {
     if b.path.dir? "$WDir/../upgrade_version/MediaInfoLib" ; then
          $(b.get bang.src_path)/bang run PrepareSource.sh -p MediaInfoLib -sp "$WDir/../upgrade_version/MediaInfoLib" -wp "$WDir" $ZL_gs -${Target} -na
     else
-        $(b.get bang.src_path)/bang run PrepareSource.sh -p MediaInfoLib -wp "$WDir" $MIL_gs $ZL_gs -${Target} -na
+        $(b.get bang.src_path)/bang run PrepareSource.sh -p MediaInfoLib -wp "$WDir" $MIL_gs $ZL_gs -${Target} -na -r https://github.com/JeromeMartinez -b Dolby
     fi
 
 }
