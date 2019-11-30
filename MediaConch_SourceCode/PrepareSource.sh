@@ -119,10 +119,10 @@ function _unix_cli () {
 
     echo "3: Autotools..."
     (cd MediaConch/Project/GNU/CLI && ./autogen.sh > /dev/null 2>&1)
-    (cd libxml2 && autoreconf -i -f > /dev/null 2>&1)
-    (cd libxslt && autoreconf -i -f > /dev/null 2>&1)
-    (cd jansson && autoreconf -i -f  > /dev/null 2>&1)
-    (cd libevent && autoreconf -i -f > /dev/null 2>&1)
+    (cd libxml2 && autoreconf -i -f)
+    (cd libxslt && autoreconf -i -f)
+    (cd jansson && autoreconf -i -f)
+    (cd libevent && autoreconf -i -f)
 
     if $MakeArchives; then
         echo "4: compressing..."
