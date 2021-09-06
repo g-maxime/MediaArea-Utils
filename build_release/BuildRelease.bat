@@ -142,6 +142,7 @@ call:Patch_MediaConch_GUI
 if NOT EXIST ..\..\%MC_SOURCES%\Qt5.9-msvc2017\ mklink /D ..\..\%MC_SOURCES%\Qt5.9-msvc2017\ %OLD_CD%\..\..\MediaArea-Utils-Binaries\Windows\Qt\Qt5.9-msvc2017 || exit /b 1
 if NOT EXIST ..\..\%MC_SOURCES%\Qt5.9-msvc2017_64\ mklink /D ..\..\%MC_SOURCES%\Qt5.9-msvc2017_64\ %OLD_CD%\..\..\MediaArea-Utils-Binaries\Windows\Qt\Qt5.9-msvc2017_64 || exit /b 1
 ping 127.0.0.1 -n 5 -w 10000 > NUL
+
 cd ..\..\%MC_SOURCES%\MediaConch\Project\MSVC2019
 MSBuild /maxcpucount:1 /verbosity:quiet /p:Configuration=Release;Platform=Win32
 ping 127.0.0.1 -n 5 -w 10000 > NUL

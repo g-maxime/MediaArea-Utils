@@ -366,6 +366,16 @@ function _all_inclusive () {
     if [ "$Target" != "ai" ]; then
         rm -fr MediaConch
         cp -a "$MC_source" MediaConch
+        rm -fr libxml2
+        git clone --depth 1 https://github.com/g-maxime/libxml2.git
+        rm -fr libxslt
+        git clone --depth 1 https://github.com/g-maxime/libxslt.git
+        rm -fr libevent
+        git clone --depth 1 https://github.com/g-maxime/libevent.git
+        rm -fr jansson
+        git clone --depth 1 https://github.com/g-maxime/jansson.git
+        rm -fr zlib
+        git clone --depth 1 https://github.com/g-maxime/zlib.git
     fi
 
     echo "2: remove what isn’t wanted..."
