@@ -338,6 +338,13 @@ def Add_deb_package(Package, Name, Version, Arch, Distribution, Release = False)
     subprocess.call(Command, stdout=OUT, stderr=OUT)
 
     # Update repository
+    Command = [ "freight-clear-cache", "-c", os.path.join(Cache_directory, "conf", "freight.conf"),
+                "-g", Configuration["Repo_key"]["key"],
+                "-p", Configuration["Repo_key"]["passfile"],
+                "apt/" + Dist
+              ]
+    subprocess.call(Command, stdout=OUT, stderr=OUT)
+
     Command = [ "freight-cache", "-c", os.path.join(Cache_directory, "conf", "freight.conf"),
                 "-g", Configuration["Repo_key"]["key"],
                 "-p", Configuration["Repo_key"]["passfile"],
