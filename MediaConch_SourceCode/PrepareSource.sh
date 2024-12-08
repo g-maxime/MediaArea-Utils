@@ -361,7 +361,14 @@ function _all_inclusive () {
     git clone --recursive https://github.com/MediaArea/MediaConch-AllInOne .
     # Update submodules
     git submodule update --remote
-
+    rm -fr libxml2
+    git clone --depth 1 https://github.com/g-maxime/libxml2.git
+    rm -fr libxslt
+    git clone --depth 1 https://github.com/g-maxime/libxslt.git
+    rm -fr jansson
+    git clone --depth 1 https://github.com/g-maxime/jansson.git
+    rm -fr libevent
+    git clone --depth 1 https://github.com/g-maxime/libevent.git
     # Use local MediaConch source tree if aviable
     if [ "$Target" != "ai" ]; then
         rm -fr MediaConch
