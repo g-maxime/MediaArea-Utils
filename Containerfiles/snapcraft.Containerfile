@@ -12,7 +12,7 @@ WORKDIR /project
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y update
 RUN DEBIAN_FRONTEND=noninteractive apt-get upgrade -y
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y install curl jq squashfs-tools snapd locales git binutils
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install curl jq squashfs-tools snapd locales git binutils sudo
 
 RUN locale-gen C.UTF-8
 
