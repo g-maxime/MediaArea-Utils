@@ -258,7 +258,7 @@ def Add_rpm_package(Package, Name, Version, Arch, Distribution, Release = False)
 
     Activation_rpm_file = "repo-%s-%s.noarch.rpm" % (Repo, Configuration["Repo_version"])
 
-    if not os.path.isfile(os.path.join(Package_directory, Activation_rpm_file)):
+    if True:
         # Remove old versions
         map(os.remove, glob(os.path.join(Package_directory, "repo-%s-*.noarch.rpm" % Repo)))
 
