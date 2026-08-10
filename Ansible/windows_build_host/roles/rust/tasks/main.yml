@@ -1,0 +1,19 @@
+---
+- name: Get rustup
+  win_shell: |
+    Invoke-WebRequest -Uri https://static.rust-lang.org/rustup/dist/x86_64-pc-windows-msvc/rustup-init.exe -OutFile $env:TEMP\rustup-init.exe
+  args:
+    executable: powershell
+
+- name: Install Rust and targets
+  win_shell: |
+      & $env:TEMP\rustup-init.exe -y --modify-path
+  args:
+    executable: powershell
+
+- name: Install additional targets
+  win_shell: |
+    & $env:USERPROFILE\.cargo\bin\rustup.exe target add {{ item }}
+  args:
+    executable: powershell
+  loop: "{{ target }}"

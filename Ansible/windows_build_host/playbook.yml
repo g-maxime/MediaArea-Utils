@@ -3,4 +3,5 @@
     roles:
       - packages
       - visualstudio2022
+      - rust
       - qt
