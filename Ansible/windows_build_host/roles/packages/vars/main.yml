@@ -9,6 +9,7 @@ packages_list:
   - ninja
   - python
   - wixtoolset
+  - strawberryperl
   - microsoft-openjdk-21
 
  packages_path:
