@@ -93,6 +93,12 @@ RUN rm -fr osc
 # bangsh
 RUN git clone https://github.com/bangsh/bangsh.git
 
+# cargo
+RUN curl -LO https://static.rust-lang.org/dist/rust-1.97.1-x86_64-unknown-linux-gnu.tar.xz
+RUN tar -xf rust-1.97.1-x86_64-unknown-linux-gnu.tar.xz
+RUN cd rust-1.97.1-x86_64-unknown-linux-gnu && ./install.sh
+RUN rm -fr rust-1.97.1-x86_64-unknown-linux-gnu rust-1.97.1-x86_64-unknown-linux-gnu.tar.xz
+
 # MediaArea-Utils
 RUN git clone --branch ${BRANCH} ${REPOSITORY}
 RUN find MediaArea-Utils -name *.sh -exec chmod +x {} \;
